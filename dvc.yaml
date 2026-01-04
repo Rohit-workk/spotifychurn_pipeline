@@ -1,0 +1,39 @@
+stages:
+  make_dataset:
+    cmd: python src/data/make_dataset.py
+    deps:
+      - src/data/make_dataset.py
+      - data/raw/data.csv
+    outs:
+      - data/interim/dataset.csv
+
+  build_features:
+    cmd: python src/features/build_features.py
+    deps:
+      - src/features/build_features.py
+      - data/interim/dataset.csv
+      - params.yaml
+    outs:
+      - data/processed/X.csv
+      - data/processed/y.csv
+      - models/scaler.pkl
+
+  train:
+    cmd: python src/models/train_model.py
+    deps:
+      - src/models/train_model.py
+      - data/processed/X.csv
+      - data/processed/y.csv
+      - params.yaml
+    outs:
+      - models/model.pkl
+    metrics:
+      - dvclive/metrics.json
+
+  evaluate:
+    cmd: python src/models/predict_model.py
+    deps:
+      - src/models/predict_model.py
+      - models/model.pkl
+    metrics:
+      - metrics.json
