@@ -11,8 +11,7 @@ features:
     - gender
 
 model:
-  name: logistic_regression   # 🔁 change only this
-
+  name: random_forest
 models:
   logistic_regression:
     C: 1.0
