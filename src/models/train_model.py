@@ -5,7 +5,7 @@ from pathlib import Path
 from dvclive import Live
 
 def load_params():
-    with open("params.yaml") as f:
+    with open("params.yaml", "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 def load_data():

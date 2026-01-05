@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 import joblib
 
 def load_params():
-    with open("params.yaml") as f:
+    with open("params.yaml", "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 def main():
